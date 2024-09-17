@@ -1,0 +1,152 @@
+[
+  {
+    "id": "deluxe-room",
+    "name": "Deluxe Room",
+    "features": ["King-Bed", "City-View", "Complimentary-Breakfast"],
+    "description": "Spacious room with modern amenities and a stunning city view.",
+    "price": "7,500",
+    "discountedPrice": "6,500",
+    "originalPrice": "7,500",
+    "image": "/images/deluxe/deluxe_room.jpg",
+    "moreImages": [
+      "/images/deluxe/deluxe_room_1.jpg",
+      "/images/deluxe/deluxe_room_2.jpg",
+      "/images/deluxe/deluxe_room_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Dining Area", "icon": "faUtensils" }
+    ],
+    "rating": 4,
+    "ratingText": "Very Good",
+    "totalRatings": 920
+  },
+  {
+    "id": "executive-suite",
+    "name": "Executive Suite",
+    "features": ["Queen-Bed", "Pool-Access", "Private-Balcony"],
+    "description": "Elegantly designed suite with private balcony and pool access.",
+    "price": "10,500",
+    "discountedPrice": "9,000",
+    "originalPrice": "10,500",
+    "image": "/images/executive_suite/executive_suite.jpg",
+    "moreImages": [
+      "/images/executive_suite/executive_suite_1.jpg",
+      "/images/executive_suite/executive_suite_2.jpg",
+      "/images/executive_suite/executive_suite_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Gym Access", "icon": "faDumbbell" }
+    ],
+    "rating": 5,
+    "ratingText": "Excellent",
+    "totalRatings": 1500
+  },
+  {
+    "id": "superior-room",
+    "name": "Superior Room",
+    "features": ["Double-Bed", "Garden-View", "Work-Desk"],
+    "description": "Comfortable room with a serene garden view and work-friendly desk.",
+    "price": "6,200",
+    "discountedPrice": "5,500",
+    "originalPrice": "6,200",
+    "image": "/images/superior_room/superior_room.jpg",
+    "moreImages": [
+      "/images/superior_room/superior_room_1.jpg",
+      "/images/superior_room/superior_room_2.jpg",
+      "/images/superior_room/superior_room_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Laundry Service", "icon": "faUtensils" }
+    ],
+    "rating": 4,
+    "ratingText": "Very Good",
+    "totalRatings": 1100
+  },
+  {
+    "id": "family-suite",
+    "name": "Family Suite",
+    "features": ["Two-Double-Beds", "Kids-Play-Area", "Separate-Living-Room"],
+    "description": "Ideal for families, with a separate living area and kids play area.",
+    "price": "12,000",
+    "discountedPrice": "10,000",
+    "originalPrice": "12,000",
+    "image": "/images/family_suite/family_suite.jpg",
+    "moreImages": [
+      "/images/family_suite/family_suite_1.jpg",
+      "/images/family_suite/family_suite_2.jpg",
+      "/images/family_suite/family_suite_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Kitchenette", "icon": "faUtensils" }
+    ],
+    "rating": 5,
+    "ratingText": "Outstanding",
+    "totalRatings": 1800
+  },
+  {
+    "id": "premium-suite",
+    "name": "Premium Suite",
+    "features": ["King-Bed", "Ocean-View", "Jacuzzi"],
+    "description": "Luxurious suite with breathtaking ocean view and in-room Jacuzzi.",
+    "price": "15,000",
+    "discountedPrice": "13,000",
+    "originalPrice": "15,000",
+    "image": "/images/premium_suite/premium_suite.jpg",
+    "moreImages": [
+      "/images/premium_suite/premium_suite_1.jpg",
+      "/images/premium_suite/premium_suite_2.jpg",
+      "/images/premium_suite/premium_suite_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Spa Access", "icon": "faDumbbell" }
+    ],
+    "rating": 5,
+    "ratingText": "Exceptional",
+    "totalRatings": 2000
+  },
+  {
+    "id": "standard-room",
+    "name": "Standard Room",
+    "features": ["Double-Bed", "City-View", "24/7-Room-ervice"],
+    "description": "Affordable room with essential amenities and a beautiful city view.",
+    "price": "5,000",
+    "discountedPrice": "4,000",
+    "originalPrice": "5,000",
+    "image": "/images/standard_room/standard_room.jpg",
+    "moreImages": [
+      "/images/standard_room/standard_room_1.jpg",
+      "/images/standard_room/standard_room_2.jpg",
+      "/images/standard_room/standard_room_3.jpg"
+    ],
+    "facilities": [
+      { "name": "Free WiFi", "icon": "faWifi" },
+      { "name": "Flat Screen TV", "icon": "faTv" },
+      { "name": "Room Service", "icon": "faHouse" },
+      { "name": "Air Conditioning", "icon": "faSnowflake" },
+      { "name": "Daily Housekeeping", "icon": "faUtensils" }
+    ],
+    "rating": 3,
+    "ratingText": "Good",
+    "totalRatings": 800
+  }
+]

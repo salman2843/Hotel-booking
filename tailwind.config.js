@@ -7,12 +7,17 @@ module.exports = {
   ],
   theme: {
     extend: {
+      colors: {
+        silver: "#C0BCB5",
+      },
       backgroundImage: {
+        "login-background": 'url("/background.jpeg")',
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
     },
   },
+
   plugins: [],
 };
