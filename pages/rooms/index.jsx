@@ -1,7 +1,5 @@
 import Image from "next/image";
 import { useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faStar,
@@ -13,93 +11,59 @@ import {
   faHouse,
 } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import roomsData from "../api/Data/roomsData";
-import Modal from "react-modal";
-import Layout from "../api/components/Layout";
-
-Modal.setAppElement("#__next");
+import roomsData from "../Data/roomsData";
+import Layout from "../components/Layout";
 
 const RoomsList = () => {
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedImage, setSelectedImage] = useState("");
-
-  const openModal = (image) => {
-    setSelectedImage(image);
-    setModalIsOpen(true);
-  };
-
-  const closeModal = () => {
-    setModalIsOpen(false);
-    setSelectedImage("");
-  };
-
   return (
     <Layout>
       <div className='container mx-auto my-10 p-4'>
         {roomsData.map((room) => (
-          <RoomCard key={room.name} room={room} openModal={openModal} />
+          <RoomCard key={room.name} room={room} />
         ))}
-        <Modal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel='Full Image Modal'
-          style={modalStyles}
-        >
-          <button
-            onClick={closeModal}
-            className='absolute top-0 right-0 mt-4 mr-4 text-gray-500 hover:text-gray-800'
-          >
-            X
-          </button>
-          <Image
-            src={selectedImage}
-            alt='Selected Room Image'
-            width={700}
-            height={500}
-            className='rounded-lg object-cover'
-          />
-        </Modal>
       </div>
     </Layout>
   );
 };
 
-const RoomCard = ({ room, openModal }) => (
-  <div className='mb-8 p-4 border rounded-lg shadow-lg'>
-    <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 items-start'>
-      <div className='relative col-span-1'>
-        <Image
-          src={room.image}
-          alt='Room Image'
-          width={300}
-          height={200}
-          className='rounded-lg object-cover mb-2'
-        />
-        <Swiper
-          direction={"horizontal"}
-          spaceBetween={10}
-          slidesPerView={4}
-          className='w-full'
-        >
-          {room.moreImages.map((img, idx) => (
-            <SwiperSlide key={idx} className='cursor-pointer'>
+const RoomCard = ({ room }) => {
+  const [bigImage, setBigImage] = useState(room.image); // Set initial big image to the room's main image
+
+  return (
+    <div className='mb-8 p-4 border rounded-lg shadow-lg'>
+      <div className='grid grid-cols-1 lg:grid-cols-3 gap-6 items-start'>
+        <div className='relative col-span-1'>
+          <Image
+            src={bigImage}
+            alt='Room Image'
+            width={300}
+            height={200}
+            className='rounded-lg object-cover mb-2'
+          />
+          <div className='grid grid-cols-3 gap-2 mt-2'>
+            {room.moreImages.map((img, idx) => (
               <Image
+                key={idx}
                 src={img}
                 alt={`Additional Image ${idx + 1}`}
-                width={70}
-                height={70}
-                className='rounded-lg object-cover'
-                onClick={() => openModal(img)}
+                width={100} // Set the same width for all small images
+                height={100} // Set the same height for all small images
+                className='rounded-lg object-cover cursor-pointer'
+                onClick={() => {
+                  const currentBigImage = bigImage; // Store the current big image
+                  setBigImage(img); // Set the clicked small image as the big image
+                  room.moreImages[idx] = currentBigImage; // Swap images in the array
+                }}
               />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+            ))}
+          </div>
+        </div>
+        <RoomDetails room={room} />
+        <BookingSection room={room} />
       </div>
-      <RoomDetails room={room} />
-      <BookingSection room={room} />
     </div>
-  </div>
-);
+  );
+};
 
 const RoomDetails = ({ room }) => (
   <div className='col-span-1'>
@@ -172,22 +136,6 @@ const getIcon = (iconName) => {
     default:
       return faWifi;
   }
-};
-
-const modalStyles = {
-  content: {
-    inset: "10% 15%",
-    backgroundColor: "#f8f9fa",
-    borderRadius: "10px",
-    padding: "20px",
-    maxWidth: "800px",
-    margin: "auto",
-    zIndex: 1000,
-  },
-  overlay: {
-    zIndex: 999,
-    backgroundColor: "rgba(0, 0, 0, 0.75)",
-  },
 };
 
 export default RoomsList;

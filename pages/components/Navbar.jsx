@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 
-const Header = () => {
+const Navbar = () => {
   return (
     <header className='bg-white shadow-md'>
       <div className='container mx-auto flex flex-wrap items-center justify-between p-5'>
@@ -50,4 +50,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

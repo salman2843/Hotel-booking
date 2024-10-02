@@ -1,11 +1,11 @@
 import Head from "next/head";
-import About from "./api/components/About";
-import Header from "./api/components/Header";
-import Header1 from "./api/components/Header1";
-import Last from "./api/components/Last";
-import Swiper from "./api/components/Swiper";
-import Reviews from "./api/components/Reviews";
-import FAQ from "./api/components/FAQ";
+import About from "./components/About";
+import Header1 from "./components/Header1";
+import Last from "./components/Last";
+import Swiper from "./components/Swiper";
+import Reviews from "./components/Reviews";
+import FAQ from "./components/FAQ";
+import Navbar from "./components/Navbar";
 
 const index = () => {
   return (
@@ -14,7 +14,7 @@ const index = () => {
         <title>QuickStay</title>
         {/* <link rel='icon' href='/icon.png'></link> */}
       </Head>
-      <Header />
+      <Navbar />
       <Swiper />
       <Header1 />
 

@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "review": "Amazing experience! The room was clean and comfortable. The staff was friendly and helpful.",
+    "rating": 5,
+    "date": "September 20, 2024"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "review": "Great location and service. The amenities were excellent, especially the spa.",
+    "rating": 4,
+    "date": "August 15, 2024"
+  },
+  {
+    "id": 3,
+    "name": "Samuel Johnson",
+    "review": "Enjoyed my stay! The food was delicious, and the room had a great view.",
+    "rating": 5,
+    "date": "July 25, 2024"
+  },
+  {
+    "id": 4,
+    "name": "Emma Brown",
+    "review": "The hotel was good, but the WiFi connection could be better.",
+    "rating": 4,
+    "date": "June 30, 2024"
+  },
+  {
+    "id": 5,
+    "name": "Michael Williams",
+    "review": "Excellent service and ambiance! Highly recommended for a relaxing stay.",
+    "rating": 5,
+    "date": "June 12, 2024"
+  },
+  {
+    "id": 6,
+    "name": "Olivia Taylor",
+    "review": "Lovely experience. The staff was attentive, and the room was spacious.",
+    "rating": 4,
+    "date": "May 22, 2024"
+  },
+  {
+    "id": 7,
+    "name": "Liam Davis",
+    "review": "Had a great time! The hotel facilities are top-notch.",
+    "rating": 5,
+    "date": "April 18, 2024"
+  },
+  {
+    "id": 8,
+    "name": "Sophia Martinez",
+    "review": "Comfortable stay, but the check-in process was a bit slow.",
+    "rating": 4,
+    "date": "March 5, 2024"
+  }
+]

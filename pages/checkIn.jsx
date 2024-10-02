@@ -12,8 +12,8 @@ import {
   faShower,
   faElevator,
 } from "@fortawesome/free-solid-svg-icons";
-import roomsData from "./api/Data/roomsData";
-import Layout from "./api/components/Layout";
+import roomsData from "./Data/roomsData";
+import Layout from "./components/Layout";
 import Link from "next/link";
 import * as React from "react";
 import dayjs from "dayjs";
@@ -88,6 +88,7 @@ const CheckIn = () => {
 
           <div className='flex flex-col justify-between'>
             <div>
+              <h1 className='text-2xl font-bold'>{room.name}</h1> <br />
               <h2 className='text-2xl font-semibold text-green-600'>
                 ₹{room.discountedPrice}{" "}
                 <span className='text-lg text-gray-500 line-through ml-2'>
@@ -97,7 +98,6 @@ const CheckIn = () => {
                   ({discountPercentage}% off)
                 </span>
               </h2>
-              <h1 className='text-2xl font-bold'>{room.name}</h1>
               <p className='text-lg mt-2'>{room.description}</p>
               <div className='mt-4'>
                 <h2 className='text-xl font-semibold'>Amenities</h2>
@@ -111,11 +111,11 @@ const CheckIn = () => {
                 </div>
               </div>
             </div>
-
             <div className='inline-flex items-center mt-4 border border-gray-300 p-4 rounded-md space-x-4'>
               {/* Date Selection using MUI DatePicker */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className='flex items-center space-x-4'>
+                  {/* Check-in DatePicker */}
                   <DatePicker
                     label='Check-in'
                     value={checkInDate}
@@ -123,10 +123,18 @@ const CheckIn = () => {
                     renderInput={(params) => (
                       <input
                         {...params}
+                        value={
+                          checkInDate
+                            ? dayjs(checkInDate).format("ddd, DD MMM")
+                            : ""
+                        }
                         className='w-28 p-2 border border-gray-300 rounded-md'
+                        readOnly
                       />
                     )}
                   />
+
+                  {/* Check-out DatePicker */}
                   <DatePicker
                     label='Check-out'
                     value={checkOutDate}
@@ -134,7 +142,13 @@ const CheckIn = () => {
                     renderInput={(params) => (
                       <input
                         {...params}
+                        value={
+                          checkOutDate
+                            ? dayjs(checkOutDate).format("ddd, DD MMM")
+                            : ""
+                        }
                         className='w-28 p-2 border border-gray-300 rounded-md'
+                        readOnly
                       />
                     )}
                   />
@@ -177,14 +191,25 @@ const CheckIn = () => {
                   </div>
                 )}
               </div>
-            </div>
-
-            <div className='mt-6 text-left'>
+            </div>{" "}
+            <br />
+            <Link
+              href={{
+                pathname: "/payment",
+                query: {
+                  room: room.name,
+                  originalPrice: room.originalPrice,
+                  price: room.discountedPrice,
+                  checkInDate: checkInDate.format("YYYY-MM-DD"), // Send check-in date
+                  checkOutDate: checkOutDate.format("YYYY-MM-DD"), // Send check-out date
+                  guests: guests, // Send guests number
+                },
+              }}
+            >
               <button className='px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300'>
                 Continue to Book
               </button>
-            </div>
-
+            </Link>
             <div className='mt-4 flex items-center relative'>
               <span className='text-red-500 font-semibold mr-2'>
                 Cancellation Policy
@@ -210,7 +235,6 @@ const CheckIn = () => {
                 </div>
               )}
             </div>
-
             {/* Popup for Safety Measures */}
             <a
               href='#'
