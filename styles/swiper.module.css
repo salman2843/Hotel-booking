@@ -12,3 +12,41 @@
   border-radius: 50%;
   object-fit: cover;
 }
+
+/* Add your Swiper styles here */
+
+.mySwiper {
+  max-width: 800px;
+  margin: auto; /* Center the swiper */
+}
+
+/* Customize the navigation buttons */
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff; /* Change color to white for better visibility */
+  width: 40px; /* Set width */
+  height: 40px; /* Set height */
+  border-radius: 50%; /* Rounded buttons */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s; /* Smooth transition on hover */
+  z-index: 10; /* Ensure buttons are above the images */
+}
+
+/* Change navigation button hover effect */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker on hover */
+}
+
+/* Style pagination bullets */
+.swiper-pagination-bullet {
+  background: #fff; /* Change bullet color to white */
+  opacity: 0.7; /* Slightly transparent */
+}
+
+.swiper-pagination-bullet-active {
+  opacity: 1; /* Fully opaque for active bullet */
+}

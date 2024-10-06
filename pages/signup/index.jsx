@@ -2,10 +2,14 @@
 import Head from "next/head";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation"; // Import useRouter correctly
+import { useRouter } from "next/navigation";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useAuth } from "@/context/AuthContext"; // Import useAuth
 
 const SignUp = () => {
+  const { login } = useAuth(); // Get login function from context
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -13,41 +17,32 @@ const SignUp = () => {
   });
 
   const [isButtonDisabled, setIsButtonDisabled] = useState(true);
-  const [message, setMessage] = useState("");
-
-  // Initialize the router
   const router = useRouter();
 
-  // Method to handle form data changes
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  // Method to handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setMessage(""); // Reset message before submission
     console.log("Customer Sign Up", formData);
 
     try {
-      // Sending POST request to the signup API using axios
-      const response = await axios.post(
-        "http://localhost:5000/api/users/signup", // Updated API path
-        formData
-      );
+      const response = await axios.post("/api/signup", formData);
+      toast.success(response.data.message || "Sign up successful!");
 
-      // Show success message
-      setMessage(response.data.message || "Sign up successful!");
-      // Navigate to the login page after successful sign-up
-      router.push("/login");
+      // Automatically log in the user after signup
+      setTimeout(() => {
+        login({ name: formData.name, email: formData.email }); // Adjust user data as necessary
+        router.push("/"); // Redirect to the homepage after logging in
+      }, 2500); // Delay of 2.5 seconds
     } catch (error) {
-      setMessage(error.response?.data?.error || "Sign up failed"); // Show error message
+      console.log("Signup error:", error.response?.data?.message);
+      toast.error(error.response?.data?.message || "Sign up failed");
     }
   };
 
-  // Effect to check if the button should be disabled or not
   useEffect(() => {
-    // Check if name, email, and password are not empty
     if (
       formData.name.trim() &&
       formData.email.trim() &&
@@ -64,8 +59,8 @@ const SignUp = () => {
       <Head>
         <title>QuickStay - Sign Up</title>
       </Head>
+      <ToastContainer />
       <div className='h-screen flex justify-between items-center bg-login-background bg-no-repeat bg-cover opacity-85'>
-        {/* Left Side - Welcome Text */}
         <div className='flex flex-col pl-10 lg:pl-20 text-white w-1/2'>
           <h2 className='text-4xl lg:text-5xl font-bold'>
             Welcome to Your Perfect Stay
@@ -81,7 +76,6 @@ const SignUp = () => {
           </p>
         </div>
 
-        {/* Right Side - Sign Up Box */}
         <div className='w-full max-w-md border bg-white p-5 lg:p-8 rounded-lg shadow-lg mr-10 lg:mr-20'>
           <p className='h-10 flex items-center px-5 bg-blue-600 text-lg font-bold text-white'>
             Sign Up
@@ -128,32 +122,24 @@ const SignUp = () => {
             />
             <button
               type='submit'
-              className={`w-full h-14 text-lg font-bold ${
-                isButtonDisabled ? "bg-gray-400" : "bg-blue-600"
-              } text-white my-5 rounded-lg`}
               disabled={isButtonDisabled}
+              className={`w-full h-10 rounded-lg text-white font-bold ${
+                isButtonDisabled
+                  ? "bg-gray-400"
+                  : "bg-blue-600 hover:bg-blue-700"
+              }`}
             >
               Sign Up
             </button>
-            <Link href='/login'>
-              <p className='text-md text-center  hover:cursor-pointer'>
-                Already have an account? &nbsp;
-                <span className='text-blue-600 hover:cursor-pointer'>
-                  Login here
-                </span>
-              </p>
-            </Link>
-
-            {message && (
-              <p
-                className={`text-center ${
-                  message.includes("failed") ? "text-red-600" : "text-green-600"
-                }`}
-              >
-                {message}
-              </p>
-            )}
           </form>
+          <div className='mt-5 text-center'>
+            <p className='text-gray-600'>
+              Already have an account?{" "}
+              <Link href='/login'>
+                <span className='text-blue-600 hover:underline'>Login</span>
+              </Link>
+            </p>
+          </div>
         </div>
       </div>
     </div>

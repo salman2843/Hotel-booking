@@ -30,14 +30,10 @@ const faqs = [
 ];
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(null);
-
-  const toggleQuestion = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className=' bg-white py-12'>
+    <div className='bg-white py-12'>
       <div className='FAQ container mx-auto px-4'>
         <h2 className='text-2xl font-bold mb-6 text-center text-blue-600'>
           Frequently Asked Questions
@@ -47,14 +43,13 @@ const FAQ = () => {
             <div
               key={index}
               className='border border-gray-300 rounded-lg shadow-sm'
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
             >
-              <button
-                onClick={() => toggleQuestion(index)}
-                className='w-full px-4 py-2 text-left bg-gray-100 rounded-t-lg focus:outline-none'
-              >
+              <button className='w-full px-4 py-2 text-left bg-gray-100 rounded-t-lg focus:outline-none'>
                 <h3 className='text-lg font-semibold'>{faq.question}</h3>
               </button>
-              {openIndex === index && (
+              {hoveredIndex === index && (
                 <div className='px-4 py-2'>
                   <p className='text-gray-700'>{faq.answer}</p>
                 </div>

@@ -1,7 +1,12 @@
+// hotelb/pages/components/Navbar.jsx
+
 import Link from "next/link";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext"; // Adjust path as necessary
 
 const Navbar = () => {
+  const { user, logout } = useAuth(); // Get user and logout from context
+
   return (
     <header className='bg-white shadow-md'>
       <div className='container mx-auto flex flex-wrap items-center justify-between p-5'>
@@ -26,7 +31,7 @@ const Navbar = () => {
               Rooms
             </p>
           </Link>
-          <Link href='/#reviews'>
+          <Link href='/#header1'>
             <p className='text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium'>
               Review
             </p>
@@ -36,14 +41,23 @@ const Navbar = () => {
               FAQ
             </p>
           </Link>
-          <Link href='/login'>
+          {user ? (
             <button
-              type='button'
-              className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-150 ease-in-out'
+              onClick={logout}
+              className='text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-150 ease-in-out'
             >
-              Login/SignUp
+              Logout
             </button>
-          </Link>
+          ) : (
+            <Link href='/login'>
+              <button
+                type='button'
+                className='text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 transition duration-150 ease-in-out'
+              >
+                Login/SignUp
+              </button>
+            </Link>
+          )}
         </nav>
       </div>
     </header>

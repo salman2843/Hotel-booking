@@ -2,6 +2,10 @@ import { useRouter } from "next/router";
 import Image from "next/image";
 import { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules"; // Import Navigation module
+import "swiper/css";
+import "swiper/css/navigation";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faInfoCircle,
@@ -68,17 +72,18 @@ const CheckIn = () => {
               spaceBetween={10}
               slidesPerView={1}
               navigation
+              modules={[Navigation]}
               className='w-full'
             >
               {[room.image, ...room.moreImages].map((img, idx) => (
                 <SwiperSlide key={idx}>
-                  <div className='w-full h-[428px] flex items-center justify-center'>
+                  <div className='w-full h-[428px] flex items-center justify-center relative'>
                     <Image
                       src={img}
                       alt={`Image ${idx + 1}`}
                       layout='fill'
                       objectFit='cover'
-                      className='rounded-lg'
+                      className='rounded-lg no-select' // Add no-select class here
                     />
                   </div>
                 </SwiperSlide>
@@ -111,7 +116,10 @@ const CheckIn = () => {
                 </div>
               </div>
             </div>
-            <div className='inline-flex items-center mt-4 border border-gray-300 p-4 rounded-md space-x-4'>
+
+            <br />
+
+            <div className='inline-flex items-center mt-4 border border-gray-300 p-5 rounded-md space-x-4 w-full'>
               {/* Date Selection using MUI DatePicker */}
               <LocalizationProvider dateAdapter={AdapterDayjs}>
                 <div className='flex items-center space-x-4'>
@@ -120,6 +128,7 @@ const CheckIn = () => {
                     label='Check-in'
                     value={checkInDate}
                     onChange={handleCheckInDateChange}
+                    minDate={dayjs()} // Disable past dates
                     renderInput={(params) => (
                       <input
                         {...params}
@@ -128,7 +137,7 @@ const CheckIn = () => {
                             ? dayjs(checkInDate).format("ddd, DD MMM")
                             : ""
                         }
-                        className='w-28 p-2 border border-gray-300 rounded-md'
+                        className='w-24 p-1 border border-gray-300 rounded-md text-center'
                         readOnly
                       />
                     )}
@@ -139,6 +148,7 @@ const CheckIn = () => {
                     label='Check-out'
                     value={checkOutDate}
                     onChange={(newValue) => setCheckOutDate(newValue)}
+                    minDate={dayjs()} // Disable past dates
                     renderInput={(params) => (
                       <input
                         {...params}
@@ -147,7 +157,7 @@ const CheckIn = () => {
                             ? dayjs(checkOutDate).format("ddd, DD MMM")
                             : ""
                         }
-                        className='w-28 p-2 border border-gray-300 rounded-md'
+                        className='w-24 p-1 border border-gray-300 rounded-md text-center'
                         readOnly
                       />
                     )}
@@ -158,13 +168,13 @@ const CheckIn = () => {
               {/* Guests Selection */}
               <div className='relative'>
                 <span
-                  className='cursor-pointer text-blue-500 border p-2 rounded-md'
+                  className='cursor-pointer text-blue-500 border p-2 rounded-md text-sm hover:bg-blue-100 transition'
                   onClick={() => setShowGuestPopup(!showGuestPopup)}
                 >
-                  {guests} Guest
+                  {guests} Guest{guests > 1 ? "s" : ""}
                 </span>
                 {showGuestPopup && (
-                  <div className='absolute bottom-full left-0 mb-2 w-40 p-4 bg-white border border-gray-300 rounded-lg shadow-lg z-10'>
+                  <div className='absolute left-0 bottom-full mb-2 w-32 p-4 bg-white border border-gray-300 rounded-lg shadow-lg z-10'>
                     <div className='flex items-center justify-between'>
                       <button
                         className='px-2 py-1 bg-gray-200 text-gray-700 rounded-l'
@@ -191,25 +201,30 @@ const CheckIn = () => {
                   </div>
                 )}
               </div>
-            </div>{" "}
+            </div>
+
             <br />
-            <Link
-              href={{
-                pathname: "/payment",
-                query: {
-                  room: room.name,
-                  originalPrice: room.originalPrice,
-                  price: room.discountedPrice,
-                  checkInDate: checkInDate.format("YYYY-MM-DD"), // Send check-in date
-                  checkOutDate: checkOutDate.format("YYYY-MM-DD"), // Send check-out date
-                  guests: guests, // Send guests number
-                },
+            {/* Continue to Book Button */}
+            <button
+              className='px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300'
+              onClick={() => {
+                // Navigate to the payment page with the desired parameters
+                router.push({
+                  pathname: "/payment",
+                  query: {
+                    room: room.name,
+                    originalPrice: room.originalPrice,
+                    price: room.discountedPrice,
+                    checkInDate: checkInDate.format("YYYY-MM-DD"), // Send check-in date
+                    checkOutDate: checkOutDate.format("YYYY-MM-DD"), // Send check-out date
+                    guests: guests, // Send guests number
+                  },
+                });
               }}
             >
-              <button className='px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg shadow-lg hover:bg-blue-700 transition duration-300'>
-                Continue to Book
-              </button>
-            </Link>
+              Continue to Book
+            </button>
+
             <div className='mt-4 flex items-center relative'>
               <span className='text-red-500 font-semibold mr-2'>
                 Cancellation Policy

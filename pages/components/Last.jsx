@@ -100,17 +100,17 @@ const Footer = () => {
           </h3>
           <ul className='space-y-3'>
             <li>
-              <a href='#' className='hover:text-white'>
+              <a href='/policies/privacy-policy' className='hover:text-white'>
                 Privacy Policy
               </a>
             </li>
             <li>
-              <a href='#' className='hover:text-white'>
+              <a href='/policies/terms' className='hover:text-white'>
                 Terms & Conditions
               </a>
             </li>
             <li>
-              <a href='#' className='hover:text-white'>
+              <a href='/policies/cancellation' className='hover:text-white'>
                 Cancellation Policy
               </a>
             </li>

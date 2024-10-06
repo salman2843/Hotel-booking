@@ -26,3 +26,10 @@
   user-select: none; /* Non-prefixed version, supported by modern browsers */
   pointer-events: none; /* Disable interactions */
 }
+
+/* Add this CSS to your global styles or a relevant stylesheet */
+.no-select {
+  user-select: none; /* Prevent selection */
+  -webkit-user-select: none; /* For Safari */
+  -moz-user-select: none; /* For Firefox */
+}
